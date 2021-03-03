@@ -4,7 +4,9 @@ import static dev.morling.jfrunit.EnableEvent.StacktracePolicy.INCLUDED;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.io.File;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -145,6 +147,12 @@ public class TodoResourceSqlStatementsTest {
             .count();
 
         // expected to fail
-        // assertThat(numberOfStatements).isEqualTo(ITERATIONS);
+        assertThat(numberOfStatements)
+            .describedAs("Expecting %s statements, but got these: %s",
+            ITERATIONS,
+            jfrEvents.filter(re -> re.getEventType().getName().equals("jdbc.PreparedQuery"))
+                    .map(e -> e.getString("SQLQuery"))
+                    .collect(Collectors.joining(System.lineSeparator())))
+            .isEqualTo(ITERATIONS);
     }
 }

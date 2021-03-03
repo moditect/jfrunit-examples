@@ -142,9 +142,9 @@ public class TodoResource {
     @Path("/with-sql-regression/{id}")
     public Response getWithSqlRegression(@PathParam("id") long id) throws Exception {
         TodoWithDetails todo = TodoWithDetails.findById(id);
-
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < todo.details.size(); i++) {
-            System.out.println(todo.details.get(i).title);
+            sb.append(todo.details.get(i).title);
         }
 
         return todo != null ?
