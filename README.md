@@ -36,4 +36,4 @@ as seen in the _example-service/pom.xml_ file.
 
 ## License
 
-This code base is available ander the Apache License, version 2.
+This code base is available under the Apache License, version 2.
