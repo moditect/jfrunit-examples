@@ -70,7 +70,7 @@ public class TodoResourceSqlStatementsTest {
         }
     }
 
-    @Test
+//    @Test
     @Order(2)
     public void retrieveTodoBaseline() throws Exception {
         Random r = new Random();

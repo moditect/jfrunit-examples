@@ -15,6 +15,8 @@ import java.util.Random;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.moditect.jfrunit.demos.todo.testutil.PostgresResource;
 
 import dev.morling.jfrunit.EnableEvent;
@@ -26,15 +28,17 @@ import jdk.jfr.consumer.RecordedEvent;
 
 @QuarkusTest
 @QuarkusTestResource(PostgresResource.class)
+@TestMethodOrder(value = OrderAnnotation.class)
 public class TodoResourceMemoryAllocationTest {
 
-    private static final int ITERATIONS = 1_000;
-    private static final int WARMUP_IITERATIONS = 2_000;
+    private static final int ITERATIONS = 10_000;
+    private static final int WARMUP_IITERATIONS = 20_000;
 
     public JfrEvents jfrEvents = new JfrEvents();
 
-    @BeforeAll
-    public static void setupTodos() {
+    @Test
+    @Order(1)
+    public void setupTodos() {
         Random r = new Random();
 
         for (int i = 1; i<= 20; i++) {
@@ -54,7 +58,8 @@ public class TodoResourceMemoryAllocationTest {
         }
     }
 
-    @Test
+//    @Test
+    @Order(2)
     @EnableEvent("jdk.ObjectAllocationInNewTLAB")
     @EnableEvent("jdk.ObjectAllocationOutsideTLAB")
     public void retrieveTodoBaseline() throws Exception {
@@ -81,6 +86,7 @@ public class TodoResourceMemoryAllocationTest {
     }
 
     @Test
+    @Order(3)
     @EnableEvent("jdk.ObjectAllocationInNewTLAB")
     @EnableEvent("jdk.ObjectAllocationOutsideTLAB")
     public void retrieveTodoShouldYieldExpectedAllocation() throws Exception {
@@ -118,7 +124,7 @@ public class TodoResourceMemoryAllocationTest {
     }
 
     @Test
-    @Order(3)
+    @Order(4)
     @EnableEvent("jdk.ObjectAllocationInNewTLAB")
     @EnableEvent("jdk.ObjectAllocationOutsideTLAB")
     public void retrieveTodoAllocationRegression() throws Exception {
