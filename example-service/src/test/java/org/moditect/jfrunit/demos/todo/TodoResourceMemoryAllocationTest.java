@@ -32,7 +32,7 @@ import jdk.jfr.consumer.RecordedEvent;
 public class TodoResourceMemoryAllocationTest {
 
     private static final int ITERATIONS = 10_000;
-    private static final int WARMUP_IITERATIONS = 20_000;
+    private static final int WARMUP_ITERATIONS = 20_000;
 
     public JfrEvents jfrEvents = new JfrEvents();
 
@@ -96,7 +96,7 @@ public class TodoResourceMemoryAllocationTest {
                 .build();
 
         // warm-up
-        for (int i = 1; i<= WARMUP_IITERATIONS; i++) {
+        for (int i = 1; i<= WARMUP_ITERATIONS; i++) {
             if (i % 1000 == 0) {
                 System.out.println(i);
             }
@@ -134,11 +134,11 @@ public class TodoResourceMemoryAllocationTest {
                 .build();
 
         // warm-up
-        for (int i = 1; i<= WARMUP_IITERATIONS; i++) {
+        for (int i = 1; i<= WARMUP_ITERATIONS; i++) {
             if (i % 1_000 == 0) {
                 System.out.println(i);
             }
-            executeRequest("with-regression/", r.nextInt(20) + 1, client);
+            executeRequest("with-allocation-regression/", r.nextInt(20) + 1, client);
         }
 
         jfrEvents.awaitEvents();
@@ -148,7 +148,7 @@ public class TodoResourceMemoryAllocationTest {
             if (i % 1_000 == 0) {
                 System.out.println(i);
             }
-            executeRequest("with-regression/", r.nextInt(20) + 1, client);
+            executeRequest("with-allocation-regression/", r.nextInt(20) + 1, client);
         }
 
         jfrEvents.awaitEvents();
