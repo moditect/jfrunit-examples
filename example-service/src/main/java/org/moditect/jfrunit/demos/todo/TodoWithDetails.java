@@ -10,10 +10,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
@@ -31,6 +34,8 @@ public class TodoWithDetails extends PanacheEntityBase {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "todo", fetch = FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.EXTRA)
+    @OrderColumn
+    @JsonIgnore
     public List<TodoDetail> details = new ArrayList<>();
     public String title;
     public int priority;
