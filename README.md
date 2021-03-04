@@ -34,6 +34,20 @@ e.g. due to higher memory allocation than expected, more IO, or more SQL stateme
 When running the `TodoResourceSqlStatementsTest` in your IDE, make sure to specify the correct JMC Agent configuration,
 as seen in the _example-service/pom.xml_ file.
 
+## Running the Application
+
+For manual testing, build the application, start a separate Postgres instance via Docker Compose and launch the app like so:
+
+```shell
+docker-compose up
+cd example-service
+clean verify -DskipTests=true
+java -jar ./example-service/target/quarkus-app/quarkus-run.jar
+
+# Testing, e.g. via httpie
+http POST localhost:8080/todo title=Test priority=2 completed=true
+```
+
 ## License
 
 This code base is available under the Apache License, version 2.

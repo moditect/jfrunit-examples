@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 import java.util.Random;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -20,6 +21,7 @@ import dev.morling.jfrunit.JfrEvents;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
+import jdk.jfr.consumer.RecordedEvent;
 
 @QuarkusTest
 @QuarkusTestResource(PostgresResource.class)
@@ -90,10 +92,10 @@ public class TodoResourceSqlStatementsTest {
 
         jfrEvents.awaitEvents();
 
-        jfrEvents.filter(re -> re.getEventType().getName().equals("jdbc.PreparedQuery"))
+        jfrEvents.filter(this::isQueryEvent)
             .forEach(System.out::println);
 
-        long numberOfStatements = jfrEvents.filter(re -> re.getEventType().getName().equals("jdbc.PreparedQuery"))
+        long numberOfStatements = jfrEvents.filter(this::isQueryEvent)
             .count();
 
         System.out.println("### Event count: " + numberOfStatements);
@@ -117,7 +119,7 @@ public class TodoResourceSqlStatementsTest {
 
         jfrEvents.awaitEvents();
 
-        long numberOfStatements = jfrEvents.filter(re -> re.getEventType().getName().equals("jdbc.PreparedQuery"))
+        long numberOfStatements = jfrEvents.filter(this::isQueryEvent)
             .count();
 
         assertThat(numberOfStatements).isEqualTo(ITERATIONS);
@@ -143,16 +145,20 @@ public class TodoResourceSqlStatementsTest {
 
         jfrEvents.awaitEvents();
 
-        long numberOfStatements = jfrEvents.filter(re -> re.getEventType().getName().equals("jdbc.PreparedQuery"))
+        long numberOfStatements = jfrEvents.filter(this::isQueryEvent)
             .count();
 
         // expected to fail
         assertThat(numberOfStatements)
             .describedAs("Expecting %s statements, but got these: %s",
             ITERATIONS,
-            jfrEvents.filter(re -> re.getEventType().getName().equals("jdbc.PreparedQuery"))
+            jfrEvents.filter(this::isQueryEvent)
                     .map(e -> e.getString("SQLQuery"))
                     .collect(Collectors.joining(System.lineSeparator())))
             .isEqualTo(ITERATIONS);
+    }
+
+    private boolean isQueryEvent(RecordedEvent event) {
+        return event.getEventType().getName().equals("jdbc.PreparedQuery");
     }
 }

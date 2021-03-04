@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+
+  todo-db:
+    image: postgres:13
+    ports:
+     - 5432:5432
+    environment:
+     - POSTGRES_USER=todouser
+     - POSTGRES_PASSWORD=todopw
+     - POSTGRES_DB=tododb
+    volumes:
+     - ./example-service/src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+     - my-network
+networks:
+  my-network:
+    name: flight-recorder-network
