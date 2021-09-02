@@ -12,15 +12,14 @@ import java.net.http.HttpResponse;
 import java.util.Locale;
 import java.util.Random;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.moditect.jfrunit.demos.todo.testutil.PostgresResource;
 
-import dev.morling.jfrunit.EnableEvent;
-import dev.morling.jfrunit.JfrEvents;
+import org.moditect.jfrunit.EnableEvent;
+import org.moditect.jfrunit.JfrEvents;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;

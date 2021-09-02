@@ -87,9 +87,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>dev.morling.jfrunit</groupId>
+      <groupId>org.moditect.jfrunit</groupId>
       <artifactId>jfrunit</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>1.0.0.Alpha1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

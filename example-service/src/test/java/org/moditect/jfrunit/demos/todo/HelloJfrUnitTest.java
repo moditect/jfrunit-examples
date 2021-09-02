@@ -2,14 +2,14 @@ package org.moditect.jfrunit.demos.todo;
 
 import org.junit.jupiter.api.Test;
 
-import dev.morling.jfrunit.EnableEvent;
-import dev.morling.jfrunit.JfrEventTest;
-import dev.morling.jfrunit.JfrEvents;
-import static dev.morling.jfrunit.JfrEventsAssert.*;
+import org.moditect.jfrunit.EnableEvent;
+import org.moditect.jfrunit.JfrEventTest;
+import org.moditect.jfrunit.JfrEvents;
+import static org.moditect.jfrunit.JfrEventsAssert.*;
 
 import java.time.Duration;
 
-import static dev.morling.jfrunit.ExpectedEvent.*;
+import static org.moditect.jfrunit.ExpectedEvent.*;
 
 @JfrEventTest
 public class HelloJfrUnitTest {
@@ -28,7 +28,7 @@ public class HelloJfrUnitTest {
         assertThat(events).contains(event("jdk.GarbageCollection"));
         assertThat(events).contains(event("jdk.ThreadSleep").with("time", Duration.ofSeconds(1)));
 
-        events.stream()
+        events.events()
             .forEach(e -> System.out.println(e));
     }
 }

@@ -1,23 +1,21 @@
 package org.moditect.jfrunit.demos.todo;
 
-import static dev.morling.jfrunit.EnableEvent.StacktracePolicy.INCLUDED;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.moditect.jfrunit.EnableEvent.StacktracePolicy.INCLUDED;
 
-import java.io.File;
 import java.util.Random;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.moditect.jfrunit.demos.todo.testutil.PostgresResource;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.moditect.jfrunit.EnableEvent;
+import org.moditect.jfrunit.JfrEvents;
+import org.moditect.jfrunit.demos.todo.testutil.PostgresResource;
 
-import dev.morling.jfrunit.EnableEvent;
-import dev.morling.jfrunit.JfrEvents;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;

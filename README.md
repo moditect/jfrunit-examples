@@ -1,13 +1,21 @@
 # Examples for JfrUnit
 
 Some examples for spotting potential performance regressions using [JfrUnit](https://github.com/moditect/jfrunit).
-JfrUnit must be installed into the local Maven repository.
-Alternatively, adjust the JfrUnit dependency in _example-service/pom.xml_ to the JitPack coordinates specified in the README in the JfrUnit repository.
+
+## Prerequisites
+
+This project requires OpenJDK 16 for its build.
+Apache Maven is used for the build.
+[JMC Agent](https://developers.redhat.com/blog/2020/10/29/collect-jdk-flight-recorder-events-at-runtime-with-jmc-agent) must be installed into the local Maven repository.
+As JMC Agent doesn't publish binaries currently, it must be built from source:
+
+```shell
+git clone https://github.com/openjdk/jmc
+cd jmc/agent
+mvn clean install
+```
 
 ## Build
-
-This project requires OpenJDK 15 or later for its build.
-Apache Maven is used for the build.
 
 Run the following to build the project:
 
