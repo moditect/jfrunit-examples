@@ -148,7 +148,7 @@ public class TodoResourceSocketIoTest {
         assertThat(bytesReadOrWritten / ITERATIONS).isLessThan(480);
     }
 
-    @Test
+    // @Test
     @Order(4)
     @EnableEvent(value="jdk.SocketRead", threshold = 0, stackTrace=INCLUDED)
     @EnableEvent(value="jdk.SocketWrite", threshold = 0, stackTrace=INCLUDED)
@@ -166,14 +166,14 @@ public class TodoResourceSocketIoTest {
         long count = jfrEvents.filter(this::isDatabaseIoEvent).count();
 
         // expected to fail
-//        assertThat(count / ITERATIONS).isEqualTo(4).describedAs("write + read per statement, write + read per commit");
+        assertThat(count / ITERATIONS).isEqualTo(4).describedAs("write + read per statement, write + read per commit");
 
         long bytesReadOrWritten = jfrEvents.filter(this::isDatabaseIoEvent)
             .mapToLong(this::getBytesReadOrWritten)
             .sum();
 
         // expected to fail
-//        assertThat(bytesReadOrWritten / ITERATIONS).isLessThan(500);
+        assertThat(bytesReadOrWritten / ITERATIONS).isLessThan(500);
     }
 
     private long getBytesReadOrWritten(RecordedEvent re) {

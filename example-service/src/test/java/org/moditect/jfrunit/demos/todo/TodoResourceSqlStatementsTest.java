@@ -123,7 +123,7 @@ public class TodoResourceSqlStatementsTest {
         assertThat(numberOfStatements).isEqualTo(ITERATIONS);
     }
 
-    @Test
+    // @Test
     @Order(4)
     @EnableEvent(value="jdk.SocketRead", threshold = 0, stackTrace=INCLUDED)
     @EnableEvent(value="jdk.SocketWrite", threshold = 0, stackTrace=INCLUDED)

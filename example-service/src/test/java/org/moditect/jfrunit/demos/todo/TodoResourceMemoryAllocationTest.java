@@ -122,7 +122,7 @@ public class TodoResourceMemoryAllocationTest {
         assertThat(sum / ITERATIONS).isLessThan(33_000);
     }
 
-    @Test
+    // @Test
     @Order(4)
     @EnableEvent("jdk.ObjectAllocationInNewTLAB")
     @EnableEvent("jdk.ObjectAllocationOutsideTLAB")
@@ -158,7 +158,7 @@ public class TodoResourceMemoryAllocationTest {
                 .sum();
 
         // expected to fail
-//        assertThat(sum / ITERATIONS).isLessThan(33_000);
+        assertThat(sum / ITERATIONS).isLessThan(33_000);
     }
 
     private void executeRequest(long id, HttpClient client) throws URISyntaxException, IOException, InterruptedException {

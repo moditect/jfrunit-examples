@@ -4,16 +4,7 @@ Some examples for spotting potential performance regressions using [JfrUnit](htt
 
 ## Prerequisites
 
-This project requires OpenJDK 16 for its build.
-Apache Maven is used for the build.
-[JMC Agent](https://developers.redhat.com/blog/2020/10/29/collect-jdk-flight-recorder-events-at-runtime-with-jmc-agent) must be installed into the local Maven repository.
-As JMC Agent doesn't publish binaries currently, it must be built from source:
-
-```shell
-git clone https://github.com/openjdk/jmc
-cd jmc/agent
-mvn clean install
-```
+This project requires OpenJDK 17 and Apache Maven for its build.
 
 ## Build
 
@@ -33,9 +24,14 @@ cd example-service
 mvn clean verify
 ```
 
-In each test class, there's a method `...Regression()` with an assertion that's commented out.
+In each test class, there's a method `...Regression()` which is commented out.
 When commenting it in, this test should fail due to a performance "regresssion",
 e.g. due to higher memory allocation than expected, more IO, or more SQL statements.
+
+[JMC Agent](https://developers.redhat.com/blog/2020/10/29/collect-jdk-flight-recorder-events-at-runtime-with-jmc-agent) is used in the `TodoResourceSqlStatementsTest`
+for emitting JFR events from Hibernate / its connection pool.
+As JMC Agent isn't available as a Maven dependency on Maven Central,
+it is retrieved using the `download-maven-plugin` from the https://github.com/adoptium/jmc-overrides/releases[Adoptium JMC Overrides project].
 
 ## Running in the IDE
 
