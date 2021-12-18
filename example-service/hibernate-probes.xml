@@ -24,7 +24,6 @@
           <expression>wrappedStatement</expression>
         </field>
       </fields>
-
     </event>
 
     <event id="jdbc.PreparedUpdate">
@@ -79,8 +78,7 @@
       <class>org.hibernate.type.descriptor.sql.BasicBinder</class>
       <method>
         <name>bind</name>
-        <descriptor>(Ljava/sql/PreparedStatement;Ljava/lang/Object;ILorg/hibernate/type/descriptor/WrapperOptions;)V
-        </descriptor>
+        <descriptor>(Ljava/sql/PreparedStatement;Ljava/lang/Object;ILorg/hibernate/type/descriptor/WrapperOptions;)V</descriptor>
 
         <parameters>
           <parameter index="1">
@@ -95,7 +93,7 @@
           </parameter>
         </parameters>
       </method>
-      <location>WRAP</location>
+      <location>ENTRY</location>
     </event>
   </events>
 </jfragent>
