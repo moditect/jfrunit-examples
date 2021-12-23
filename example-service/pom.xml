@@ -65,13 +65,11 @@
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>1.15.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>postgresql</artifactId>
-      <version>1.15.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -82,8 +80,8 @@
     </dependency>
     <dependency>
       <groupId>org.moditect.jfrunit</groupId>
-      <artifactId>jfrunit</artifactId>
-      <version>1.0.0.Alpha1</version>
+      <artifactId>jfrunit-core</artifactId>
+      <version>1.0.0.Alpha2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
