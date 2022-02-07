@@ -1,0 +1,95 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'nu.studer.jooq' version '7.1'
+    id 'java'
+    id "de.undercouch.download" version "5.0.1"
+}
+
+group = 'org.moditect.jfrunit.demos'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    jmcAgent
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-jooq'
+    runtimeOnly 'org.postgresql:postgresql'
+    jooqGenerator 'org.postgresql:postgresql'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.moditect.jfrunit:jfrunit-core:1.0.0.Alpha2'
+}
+
+task downloadFile(type: Download) {
+    src 'https://github.com/adoptium/jmc-overrides/releases/download/8.1.1/agent-1.0.1.jar'
+    dest "$buildDir/jmc-agent/"
+}
+
+tasks.named('test') {
+    jvmArgs += "-javaagent:$buildDir/jmc-agent=jooq.xml"
+    jvmArgs += "--add-opens"
+    jvmArgs += "java.base/jdk.internal.misc=ALL-UNNAMED"
+    useJUnitPlatform()
+}
+
+jooq {
+    version = dependencyManagement.importedProperties['jooq.version']
+    edition = nu.studer.gradle.jooq.JooqEdition.OSS
+
+    configurations {
+        main {  // name of the jOOQ configuration
+            generateSchemaSourceOnCompilation = true
+
+            generationTool {
+                logging = org.jooq.meta.jaxb.Logging.WARN
+                jdbc {
+                    driver = 'org.postgresql.Driver'
+                    url = 'jdbc:postgresql://localhost:5433/tododb'
+                    user = 'todouser'
+                    password = 'todopw'
+                }
+                generator {
+                    name = 'org.jooq.codegen.DefaultGenerator'
+                    database {
+                        name = 'org.jooq.meta.postgres.PostgresDatabase'
+                        inputSchema = 'public'
+                        forcedTypes {
+                            forcedType {
+                                name = 'varchar'
+                                includeExpression = '.*'
+                                includeTypes = 'JSONB?'
+                            }
+                            forcedType {
+                                name = 'varchar'
+                                includeExpression = '.*'
+                                includeTypes = 'INET'
+                            }
+                        }
+                    }
+                    generate {
+                        deprecated = false
+                        records = true
+                        immutablePojos = true
+                        fluentSetters = true
+                    }
+                    target {
+                        packageName = 'org.moditect.jfrunit.demos.spring_jooq.generated'
+                        directory = 'build/generated-src/jooq/main'  // default (can be omitted)
+                    }
+                    strategy.name = 'org.jooq.codegen.DefaultGeneratorStrategy'
+                }
+            }
+        }
+    }
+}
