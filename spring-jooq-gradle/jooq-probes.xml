@@ -13,7 +13,7 @@
             <class>org.jooq.impl.AbstractQuery</class>
             <description>Emitted when jOOQ executes a statement, may contain the rendered SQL</description>
             <path>JDBC</path>
-            <stacktrace>false</stacktrace>
+            <stacktrace>true</stacktrace>
             <rethrow>false</rethrow>
             <location>WRAP</location>
             <method>
@@ -34,7 +34,7 @@
             <class>org.jooq.impl.AbstractResultQuery</class>
             <description>Emitted when jOOQ executes a statement, may contain the rendered SQL</description>
             <path>JDBC</path>
-            <stacktrace>false</stacktrace>
+            <stacktrace>true</stacktrace>
             <rethrow>false</rethrow>
             <location>WRAP</location>
             <method>
