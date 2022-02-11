@@ -8,21 +8,29 @@
         <allowconverter>true</allowconverter>
     </config>
     <events>
-        <event id="jooq.ExecutePreparedStmt">
-            <label>PreparedStatement Execute</label>
-            <class>org.jooq.tools.jdbc.DefaultPreparedStatement</class>
-            <description>Emitted when JOOQ executes a statement</description>
+        <event id="jooq.AbstractQuery">
+            <label>jOOQ Query</label>
+            <class>org.jooq.impl.AbstractQuery</class>
+            <description>Emitted when jOOQ executes a statement, may contain the rendered SQL</description>
             <path>JDBC</path>
             <stacktrace>false</stacktrace>
             <rethrow>false</rethrow>
             <location>WRAP</location>
             <method>
                 <name>execute</name>
-                <descriptor>()Z</descriptor>
+                <descriptor>(Lorg/jooq/ExecuteContext;Lorg/jooq/ExecuteListener;)I</descriptor>
+                <parameters>
+                    <parameter index="0">
+                        <name>SQL</name>
+                        <description>Rendered SQL String, may be null</description>
+                        <contenttype>None</contenttype>
+                        <converter>org.moditect.jfrunit.demos.spring_jooq.ExecuteContextSqlConverter</converter>
+                    </parameter>
+                </parameters>
             </method>
         </event>
-        <event id="jooq.AbstractQuerySql">
-            <label>jOOQ Execute Statement with SQL</label>
+        <event id="jooq.AbstractResultQuery">
+            <label>jOOQ Result Query</label>
             <class>org.jooq.impl.AbstractResultQuery</class>
             <description>Emitted when jOOQ executes a statement, may contain the rendered SQL</description>
             <path>JDBC</path>
@@ -31,15 +39,15 @@
             <location>WRAP</location>
             <method>
                 <name>execute</name>
-                <descriptor>(Lorg/jooq/ExecuteContextLorg/jooq/ExecuteListener;)I</descriptor>
-<!--                <parameters>-->
-<!--                    <parameter index="0">-->
-<!--                        <name>SQL</name>-->
-<!--                        <description>Rendered SQL String, may be null</description>-->
-<!--                        <contenttype>None</contenttype>-->
-<!--                        <converter>org.moditect.jfrunit.demos.spring_jooq.ExecuteContextSqlConverter</converter>-->
-<!--                    </parameter>-->
-<!--                </parameters>-->
+                <descriptor>(Lorg/jooq/ExecuteContext;Lorg/jooq/ExecuteListener;)I</descriptor>
+                <parameters>
+                    <parameter index="0">
+                        <name>SQL</name>
+                        <description>Rendered SQL String, may be null</description>
+                        <contenttype>None</contenttype>
+                        <converter>org.moditect.jfrunit.demos.spring_jooq.ExecuteContextSqlConverter</converter>
+                    </parameter>
+                </parameters>
             </method>
         </event>
     </events>
