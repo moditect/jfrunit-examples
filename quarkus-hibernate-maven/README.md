@@ -9,7 +9,7 @@ This project requires OpenJDK 17 and Apache Maven for its build.
 Run the following to build the project:
 
 ```shell
-cd examples/user-service
+cd user-service
 mvn clean verify
 java -Dquarkus.http.port=8082 -jar target/jfrunit-demo-user-1.0.0-SNAPSHOT-runner.jar
 ```
@@ -18,7 +18,7 @@ This starts the "user" service, which is accessed by the example service within 
 Then build the example service itself:
 
 ```shell
-cd examples/example-service
+cd example-service
 mvn clean verify
 ```
 
@@ -42,7 +42,7 @@ For manual testing, build the application, start a separate Postgres instance vi
 
 ```shell
 docker-compose up
-cd examples/example-service
+cd example-service
 clean verify -DskipTests=true
 java -jar ./examples/example-service/target/quarkus-app/quarkus-run.jar
 

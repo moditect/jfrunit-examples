@@ -5,8 +5,8 @@ Some examples for spotting potential performance regressions using [JfrUnit](htt
 There are currently two examples:
 | Example | Technology | Description |
 | --- | --- | --- |
-| [example-service](./examples/example-service) | Maven, Quarkus, Hibernate, JMC Agent, JUnit | Service testing GC, object allocation, socket I/O, and Hibernate HQL/SQL events |
-| [spring-jooq-gradle](./examples/spring-jooq-gradle) | Gradle, Spring Boot, jOOQ, JMC Agent, JUnit | Service demonstrating launching Gradle tests with the JMC Agent to test queries executed with the jOOQ DSL |
+| [quarkus-hibernate-maven](./quarkus-hibernate-maven) | Maven, Quarkus, Hibernate, JMC Agent, JUnit | Service Testing GC, object allocation, socket I/O, and Hibernate HQL/SQL events |
+| [spring-jooq-gradle](./examples/spring-jooq-gradle) | Gradle, Spring Boot, jOOQ, JMC Agent, JUnit | Service Demonstrating launching Gradle tests with the JMC Agent to test queries executed with the jOOQ DSL |
 
 ## License
 
