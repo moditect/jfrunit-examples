@@ -37,7 +37,7 @@ task downloadFile(type: Download) {
 }
 
 tasks.named('test') {
-    jvmArgs += "-javaagent:$buildDir/jmc-agent=jooq.xml"
+    jvmArgs += "-javaagent:$buildDir/jmc-agent=jooq-probes.xml"
     jvmArgs += "--add-opens"
     jvmArgs += "java.base/jdk.internal.misc=ALL-UNNAMED"
     useJUnitPlatform()

@@ -5,11 +5,7 @@
 .settings/
 bin/
 
-# IntelliJ
-.idea
-*.ipr
-*.iml
-*.iws
+/.idea/
 
 # NetBeans
 nb-configuration.xml
@@ -29,8 +25,8 @@ nb-configuration.xml
 *.rej
 
 # Maven
-target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-release.properties
+/examples/*/target/
+
+# Gradle
+/examples/*/build/
+/examples/*/.gradle/

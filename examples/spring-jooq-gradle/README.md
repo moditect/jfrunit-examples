@@ -5,7 +5,7 @@ This example uses [Gradle JVM toolchains](https://docs.gradle.org/current/usergu
 To run this example:
 
 ```shell
-cd spring-jooq-gradle
+cd examples/spring-jooq-gradle
 docker-compose up -d # Start the Postgres container on port 5433
 
 ./gradlew downloadFile # Download jmc-agent to ./build/jmc-agent
