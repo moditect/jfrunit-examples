@@ -25,8 +25,9 @@ nb-configuration.xml
 *.rej
 
 # Maven
-/examples/*/target/
+target/
 
 # Gradle
-/examples/*/build/
-/examples/*/.gradle/
+build/
+.gradle/
+gradle/
