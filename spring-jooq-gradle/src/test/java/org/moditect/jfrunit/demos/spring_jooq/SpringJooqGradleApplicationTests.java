@@ -54,7 +54,7 @@ public class SpringJooqGradleApplicationTests {
     }
 
     private boolean isQueryEvent(RecordedEvent event) {
-        return event.getEventType().getName().equals("jooq.ExecutePreparedStmt");
+        return event.getEventType().getName().equals("jooq.AbstractQuery") ||
+            event.getEventType().getName().equals("jooq.AbstractResultQuery");
     }
-
 }
