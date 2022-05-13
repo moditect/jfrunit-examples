@@ -11,7 +11,7 @@ Run the following to build the project:
 ```shell
 cd user-service
 mvn clean verify
-java -Dquarkus.http.port=8082 -jar target/jfrunit-demo-user-1.0.0-SNAPSHOT-runner.jar
+java -Dquarkus.http.port=8082 -jar target/quarkus-app/quarkus-run.jar
 ```
 
 This starts the "user" service, which is accessed by the example service within one of the regression scenarios.

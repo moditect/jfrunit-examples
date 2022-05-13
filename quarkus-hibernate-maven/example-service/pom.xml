@@ -11,10 +11,10 @@
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <quarkus-plugin.version>1.13.4.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>2.9.0.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>1.13.4.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.9.0.Final</quarkus.platform.version>
     <surefire-plugin.version>2.22.1</surefire-plugin.version>
     <dependency-plugin.version>3.1.2</dependency-plugin.version>
   </properties>
@@ -60,6 +60,7 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
+      <version>3.22.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
